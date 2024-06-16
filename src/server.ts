@@ -8,7 +8,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const { TOKEN } = require('./config/index');
 const { handleUsername } = require('./game.js');
 const http = require('http');
-
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 const bot = new TelegramBot(TOKEN, { polling: true });
 
 dotenv.config();
@@ -39,12 +40,33 @@ app.get("/api/get-suv-version", (req, res) => {
 
 if (process.env.ENVIRONMENT === "PRODUCTION") {
   console.log("Production requested");
-  app.use(express.static(path.join(__dirname, "build", "index.html")));
+  app.use(express.static(path.join(__dirname, "dist", "index.html")));
 
   app.get("/*", async (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
   });
 }
+
+
+const server = createServer(app);
+const io = new Server(server);
+
+// Listen for Socket.IO connections
+io.on('connection', (socket) => {
+  console.log('A user connected', socket.id);
+
+  // Example: Listen for a custom event from the client
+  socket.on('ranking-update', (data) => {
+    console.log(data);
+    // Handle the event, e.g., send a message to all clients
+    io.emit('responseToSomeEvent', { message: 'Received your event!' });
+  });
+
+  // Example: Emit an event to the newly connected client
+  socket.emit('welcomeMessage', { message: 'Welcome to our server!' });
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on ${port}`);
