@@ -2,14 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.ts",
+      "src": "src/server.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server.ts"
+      "dest": "/$1"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "@env:DATABASE_URL",
+    "API_KEY": "@env:API_KEY"
+  }
 }

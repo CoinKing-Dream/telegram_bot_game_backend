@@ -38,14 +38,14 @@ app.get("/api/get-suv-version", (req, res) => {
   );
 });
 
-if (process.env.ENVIRONMENT === "PRODUCTION") {
+// if (process.env.ENVIRONMENT === "PRODUCTION") {
   console.log("Production requested");
   app.use(express.static(path.join(__dirname, "dist", "index.html")));
 
   app.get("/*", async (req, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"));
   });
-}
+// }
 
 
 const server = createServer(app);
@@ -86,7 +86,7 @@ bot.on('message', async msg => {
       case '/START':
         bot.sendMessage(
           chatId,
-          `Let's get started!\n\nWhat is your XATOMS username?`,
+          `Let's get started!\n\nWhat is your RuneForce username?`,
           {
             parse_mode: 'HTML',
           }

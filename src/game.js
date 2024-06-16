@@ -1,6 +1,6 @@
 async function handleUsername(bot, chatId, userId, username) {
   const buttons = [
-    [{ text: 'Play', web_app: { url: 'http://localhost:5173' } }],
+    [{ text: 'Play', web_app: { url: 'https://84ca-45-126-3-252.ngrok-free.app' } }],
     // [{ text: 'Go to Go! AI-RPG', url: 'https://ton.app/social/go!-app?id=1349' }],
     // [{ text: 'X(Twitter)', url: 'https://x.com/gorwachain' }],
     // [{ text: 'Telegram', url: 'https://t.me/gorwachain' }],
@@ -12,7 +12,7 @@ async function handleUsername(bot, chatId, userId, username) {
   const playGuitarEmoji = '\uD83C\uDFB8'; // 🎸
   const gemEmoji = '\uD83D\uDC8E'; // 💎
   const giftEmoji = '\uD83C\uDF81'; // 🎁
-  const text = `Welcome to our X-ATOMS game, ${username}!\n
+  const text = `Welcome to our Rune Force game, ${username}!\n
 What can this bot do?\n
 ${eyesEmoji} Click Start below\n
 ${playGuitarEmoji} Play the guitar! token to collect rewards\n
