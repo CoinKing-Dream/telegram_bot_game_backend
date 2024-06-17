@@ -12,8 +12,4 @@
         "dest": "/$1"
       }
     ],
-    "env": {
-      "DATABASE_URL": "@env:DATABASE_URL",
-      "API_KEY": "@env:API_KEY"
-    }
   }
