@@ -25,7 +25,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/static", express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "dist", "index.html")));
+
+app.get("/*", async (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 
 app.use("/api/wallet", wallet);
 app.get("/api/get-suv-version", (req, res) => {
@@ -40,10 +43,7 @@ app.get("/api/get-suv-version", (req, res) => {
 
 // if (process.env.ENVIRONMENT === "PRODUCTION") {
   console.log("Production requested");
-  app.use(express.static(path.join(__dirname, "dist", "index.html")));
-
-  app.get("/*", async (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  
   });
 // }
 
